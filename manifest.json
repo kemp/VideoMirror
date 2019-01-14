@@ -1,0 +1,26 @@
+{
+  "name": "VideoMirror",
+  "version": "1.0",
+  "description": "Mirrors all videos on a page.",
+  "permissions": ["declarativeContent", "activeTab"],
+  "background": {
+    "scripts": ["background.js"],
+    "persistent": false
+  },
+  "page_action": {
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "images/VideoMirror16.png",
+      "32": "images/VideoMirror32.png",
+      "48": "images/VideoMirror48.png",
+      "128": "images/VideoMirror128.png"
+    }
+  },
+  "icons": {
+    "16": "images/VideoMirror16.png",
+    "32": "images/VideoMirror32.png",
+    "48": "images/VideoMirror48.png",
+    "128": "images/VideoMirror128.png"
+  },
+  "manifest_version": 2
+}
