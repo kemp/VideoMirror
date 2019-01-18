@@ -1,7 +1,26 @@
-var flipScript = 'rotateY(180deg)';
+(function() {
+    const flipDuration = 250;
 
-document.querySelectorAll('video').forEach((e) => {
-    e.style.transform = e.style.transform == flipScript ? '' : flipScript;
-});
+    document.querySelectorAll('video').forEach((e) => {
+        e.style.transition = 'transform ' + flipDuration + 'ms ease-out';
+    });
 
-console.log('videos reversed');
+    if (window.videoMirrorIsFlipped == false) {
+        document.querySelectorAll('video').forEach((e) => {
+            e.style.transform = 'rotateY(0deg)';
+        });
+        window.videoMirrorIsFlipped = true;
+    } else {
+        document.querySelectorAll('video').forEach((e) => {
+            e.style.transform = 'rotateY(180deg)';
+        });
+        window.videoMirrorIsFlipped = false;
+    }
+
+    setTimeout(() => {
+        document.querySelectorAll('video').forEach((e) => {
+            e.style.transition = '';
+        });
+    }, flipDuration);
+})();
+
