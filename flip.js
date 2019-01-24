@@ -1,26 +1,81 @@
 (function() {
     const flipDuration = 250;
+    let watchList = [];
 
-    document.querySelectorAll('video').forEach((e) => {
-        e.style.transition = 'transform ' + flipDuration + 'ms ease-out';
-    });
-
-    if (window.videoMirrorIsFlipped == false) {
-        document.querySelectorAll('video').forEach((e) => {
-            e.style.transform = 'rotateY(0deg)';
-        });
+    if (typeof window.videoMirrorIsFlipped === 'undefined') {
+        // First run
+        flipAllVideos();
         window.videoMirrorIsFlipped = true;
+
+        // Add mutation observers
+        startMutationObserver();
+        // setInterval(flipAllVideos, 1000); // Temp
+
+    } else if (window.videoMirrorIsFlipped == false) {
+        window.videoMirrorIsFlipped = true;
+        flipAllVideos();
     } else {
-        document.querySelectorAll('video').forEach((e) => {
-            e.style.transform = 'rotateY(180deg)';
-        });
         window.videoMirrorIsFlipped = false;
+        unflipAllVideos();
     }
 
-    setTimeout(() => {
-        document.querySelectorAll('video').forEach((e) => {
-            e.style.transition = '';
+    function flipVideo(video, animate, flip) {
+        if (typeof flip === 'undefined') flip = true; // Flip defaults to true
+
+        if (animate) {
+            video.style.transition = 'transform ' + flipDuration + 'ms ease-out';
+
+            setTimeout(() => {
+                video.style.transition = '';
+            }, flipDuration);
+        }
+
+        video.style.transform = flip ? 'rotateY(180deg)' : 'rotateY(0deg)';
+
+        // Keep watch over the video if it is flipped, otherwise stop keeping watch of it.
+        if (watchList.indexOf(video) == -1) {
+            observeVideo(video);
+            watchList.push(video);
+        }
+    }
+
+    function unflipVideo(video, animate) {
+        flipVideo(video, animate, false);
+    }
+
+    function flipAllVideos() {
+        document.querySelectorAll('video').forEach(video => flipVideo(video, true));
+    }
+
+    function unflipAllVideos() {
+        document.querySelectorAll('video').forEach(video => unflipVideo(video, true));
+    }
+
+    function observeVideo(video) {
+        let observer = new MutationObserver((mutations) => {
+            mutations.forEach((mutation) => {
+                if (mutation.type == 'attributes' && mutation.attributeName == 'style') {
+                    // The style attribute was updated on this element.
+                    // We should make sure that our transforms are still there.
+                    flipVideo(mutation.target, false, window.videoMirrorIsFlipped);
+                }
+            });
         });
-    }, flipDuration);
+
+        observer.observe(video, { attributes: true });
+    }
+
+    function startMutationObserver() {
+        let observer = new MutationObserver((mutations) => {
+            mutations.forEach((mutation) => {
+                Array.from(mutation.addedNodes).filter(function(addedNode) { return addedNode.nodeName == 'VIDEO' }).forEach(function(addedNode) {
+                    // If a video is added randomly, we should make sure that it is flipped too.
+                    flipVideo(mutation.target, false, window.videoMirrorIsFlipped);
+                });
+            });
+        });
+
+        observer.observe(document.body, {childList: true, subtree: true});
+    }
 })();
 
