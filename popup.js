@@ -6,7 +6,7 @@
     chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
         chrome.tabs.executeScript(
             tabs[0].id,
-            {file: 'flip.js'}
+            {file: 'flip.js', allFrames: true}
         );
 
         chrome.pageAction.getTitle({ tabId: tabs[0].id }, (title) => {
