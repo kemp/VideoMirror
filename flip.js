@@ -1,5 +1,11 @@
 (function() {
     const flipDuration = 250;
+    const flipQuery = [
+        'video',                                        // Support normal videos
+        '.meeting-app .active-video-container__canvas', // Zoom: The other main camera
+        '.meeting-app .self-video-container__canvas'    // Zoom: Your own camera
+    ].join(', ');  // (note: this must also be changed in background.js)
+
     let watchList = [];
 
     if (typeof window.videoMirrorIsFlipped === 'undefined') {
@@ -44,11 +50,11 @@
     }
 
     function flipAllVideos() {
-        document.querySelectorAll('video').forEach(video => flipVideo(video, true));
+        document.querySelectorAll(flipQuery).forEach(video => flipVideo(video, true));
     }
 
     function unflipAllVideos() {
-        document.querySelectorAll('video').forEach(video => unflipVideo(video, true));
+        document.querySelectorAll(flipQuery).forEach(video => unflipVideo(video, true));
     }
 
     function observeVideo(video) {
