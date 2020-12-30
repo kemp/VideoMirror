@@ -1,9 +1,11 @@
 (function() {
+
     const flipDuration = 250;
     const flipQuery = [
         'video',                                        // Support normal videos
         '.meeting-app .active-video-container__canvas', // Zoom: The other main camera
-        '.meeting-app .self-video-container__canvas'    // Zoom: Your own camera
+        '.meeting-app .self-video-container__canvas',   // Zoom: Your own camera
+        'iframe[src^="https://player.vimeo.com"]',       // Embedded vimeo
     ].join(', ');  // (note: this must also be changed in background.js)
 
     let watchList = [];
