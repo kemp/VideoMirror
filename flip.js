@@ -1,5 +1,7 @@
 (function() {
 
+    const DEBUG_MODE = true;
+
     const flipDuration = 250;
     const flipQuery = [
         'video',                                        // Support normal videos
@@ -10,22 +12,7 @@
 
     let watchList = [];
 
-    if (typeof window.videoMirrorIsFlipped === 'undefined') {
-        // First run
-        flipAllVideos();
-        window.videoMirrorIsFlipped = true;
-
-        // Add mutation observers
-        startMutationObserver();
-        // setInterval(flipAllVideos, 1000); // Temp
-
-    } else if (window.videoMirrorIsFlipped == false) {
-        window.videoMirrorIsFlipped = true;
-        flipAllVideos();
-    } else {
-        window.videoMirrorIsFlipped = false;
-        unflipAllVideos();
-    }
+    window.videoMirrorIsFlipped = false;
 
     function flipVideo(video, animate, flip) {
         if (typeof flip === 'undefined') flip = true; // Flip defaults to true
@@ -47,18 +34,6 @@
         }
     }
 
-    function unflipVideo(video, animate) {
-        flipVideo(video, animate, false);
-    }
-
-    function flipAllVideos() {
-        document.querySelectorAll(flipQuery).forEach(video => flipVideo(video, true));
-    }
-
-    function unflipAllVideos() {
-        document.querySelectorAll(flipQuery).forEach(video => unflipVideo(video, true));
-    }
-
     function observeVideo(video) {
         let observer = new MutationObserver((mutations) => {
             mutations.forEach((mutation) => {
@@ -73,17 +48,14 @@
         observer.observe(video, { attributes: true });
     }
 
-    function startMutationObserver() {
-        let observer = new MutationObserver((mutations) => {
-            mutations.forEach((mutation) => {
-                Array.from(mutation.addedNodes).filter(function(addedNode) { return addedNode.nodeName == 'VIDEO' }).forEach(function(addedNode) {
-                    // If a video is added randomly, we should make sure that it is flipped too.
-                    flipVideo(mutation.target, false, window.videoMirrorIsFlipped);
-                });
-            });
-        });
+    function videoMirrorSetFlip(flipped) {
+        DEBUG_MODE && console.debug(`The following NodeList is what VideoMirror will ${flipped ? 'flip' : 'unflip'}:`);
+        DEBUG_MODE && console.debug(document.querySelectorAll(flipQuery));
 
-        observer.observe(document.body, {childList: true, subtree: true});
+        window.videoMirrorIsFlipped = flipped;
+        document.querySelectorAll(flipQuery).forEach(video => flipVideo(video, true, flipped));
     }
+
+    window.videoMirrorSetFlip = videoMirrorSetFlip;
 })();
 
