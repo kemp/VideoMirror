@@ -7,6 +7,7 @@
         'video',                                        // Support normal videos
         '.meeting-app .active-video-container__canvas', // Zoom: The other main camera
         '.meeting-app .self-video-container__canvas',   // Zoom: Your own camera
+        '.meeting-app .gallery-video-container__canvas',// Zoom: Gallery view
         'iframe[src^="https://player.vimeo.com"]',       // Embedded vimeo
     ].join(', ');  // (note: this must also be changed in background.js)
 
