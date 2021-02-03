@@ -11,10 +11,10 @@
     "default_popup": "popup.html",
     "default_title": "VideoMirror Usage: on a page with a video, click the VideoMirror icon. All videos on the page should mirror. Click again to undo.",
     "default_icon": {
-      "16": "images/VideoMirror-gray16.png",
-      "32": "images/VideoMirror-gray32.png",
-      "48": "images/VideoMirror-gray48.png",
-      "128": "images/VideoMirror-gray128.png"
+      "16": "images/VideoMirror16.png",
+      "32": "images/VideoMirror32.png",
+      "48": "images/VideoMirror48.png",
+      "128": "images/VideoMirror128.png"
     }
   },
   "icons": {
