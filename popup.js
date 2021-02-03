@@ -19,6 +19,10 @@
         return new Promise((resolve, reject) => {
             let met = getProp(chrome, method);
             met(...args, response => {
+                if (chrome.runtime.lastError) {
+                    reject(chrome.runtime.lastError)
+                }
+
                 resolve(response);
             });
         });
@@ -68,6 +72,16 @@
 
             // Close the pop-up window with the loading spinner
             window.close();
-        })
+        }).catch((error) => {
+            console.error('There was an error while flipping VideoMirror.');
+
+            let errorContainerEl = document.getElementById('error-container');
+            let errorMessageEl = document.getElementById('error-message');
+            let spinnerEl = document.getElementById('loading-spinner');
+
+            errorMessageEl.innerText = JSON.stringify(error);
+            errorContainerEl.classList.remove('hidden');
+            spinnerEl.classList.add('hidden');
+        });
 
 })();

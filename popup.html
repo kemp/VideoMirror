@@ -82,10 +82,16 @@
 			  }
 			}
 
+			.hidden {
+				display: none;
+			}
+
 		</style>
 	</head>
     <body>
     	<div class="lds-spinner"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+
+		<span id="error-container" class="hidden">There was an error performing this operation: <span id="error-message"></span></span>
 
 
         <script src="popup.js"></script>
