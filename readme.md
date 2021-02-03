@@ -16,6 +16,10 @@ If you would like to support my work in maintaining VideoMirror and keeping it a
 Thank you so much for helping out!
 
 Recent updates:
+- v2.1.0 (latest): Actually fixed Google Meet issue
+- v2.0.1: Fixed Google Meet issue
+- v2.0.0: Made icon more clear when it is enabled/disabled and fixed 🤞 Zoom for web
+- v1.3.1: Add partial support for embedded vimeo players
 - v1.3.0 (latest): Add support for Zoom
 - v1.2.1: Remove uninstallation survey
 - v1.2.0: Flipping is more consistent during page changes (e.g. when entering/exiting full screen)
