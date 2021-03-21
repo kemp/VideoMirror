@@ -12,6 +12,7 @@
     window.videoMirrorIsLoaded = true;
 
     window.videoMirrorIsFlipped = false;
+    window.videoMirrorObserver = null;
 
     const flipDuration = 250;
     const flipQuery = [
@@ -94,11 +95,20 @@
 
         // Keep watch over the video if it is flipped, otherwise stop keeping watch of it.
         if (flip) {
+            if (window.videoMirrorObserver === null) {
+                window.videoMirrorObserver = observeBodyForNewVideos();
+            }
+
             if (typeof watchList.get(video) == 'undefined') {
                 let observer = observeVideo(video);
                 watchList.set(video, observer);
             }
         } else {
+            if (window.videoMirrorObserver !== null) {
+                window.videoMirrorObserver.disconnect();
+                window.videoMirrorObserver = null;
+            }
+
             let observer = watchList.get(video);
 
             if (typeof observer != 'undefined') {
@@ -121,6 +131,21 @@
         });
 
         observer.observe(video, { attributes: true });
+
+        return observer;
+    }
+
+    function observeBodyForNewVideos() {
+        let observer = new MutationObserver((mutations) => {
+            mutations.forEach((mutation) => {
+                Array.from(mutation.addedNodes).filter(function(addedNode) { return addedNode.nodeName == 'VIDEO' }).forEach(function(addedNode) {
+                    // If a video is added randomly, we should make sure that it is flipped too.
+                    flipVideo(mutation.target, false, window.videoMirrorIsFlipped);
+                });
+            });
+        });
+
+        observer.observe(document.body, {childList: true, subtree: true});
 
         return observer;
     }
