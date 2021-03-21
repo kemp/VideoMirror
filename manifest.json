@@ -1,6 +1,6 @@
 {
   "name": "VideoMirror",
-  "version": "2.1.0",
+  "version": "2.2.0",
   "description": "Video mirror (left-to-right) on any page (including Zoom, YouTube, Vimeo, Twitch, Google Meet, etc.)",
   "permissions": ["declarativeContent", "activeTab"],
   "background": {
