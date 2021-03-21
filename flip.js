@@ -103,6 +103,7 @@
 
             if (typeof observer != 'undefined') {
                 observer.disconnect();
+                watchList.delete(video);
             }
         }
     }
