@@ -1,7 +1,12 @@
 <!DOCTYPE html>
 <html>
 	<head>
+		<meta charset="utf-8">
 		<style>
+			:root {
+				--brand-color: #AC0609;
+			}
+
 			/* https://loading.io/css/ */
 			.lds-spinner {
 			  color: red;
@@ -86,13 +91,78 @@
 				display: none;
 			}
 
+			.message,
+			.action {
+				min-width: 8rem;
+				padding: 1rem 3rem;
+			}
+
+			.message {
+
+			}
+
+			.action {
+				padding-top: 0;
+			}
+
+			.center {
+				display: flex;
+				justify-content: center;
+			}
+
+			body {
+				padding: 2rem;
+				beckground: #fefefe;
+			}
+
+			button {
+				background: white;
+				padding: 0.4rem 1rem;
+				border-radius: 4px;
+				border: 1px solid var(--brand-color);
+				color: var(--brand-color);
+                cursor: pointer;
+				width: 100%;
+				font-weight: bold;
+			}
+
 		</style>
 	</head>
     <body>
-    	<div class="lds-spinner"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+		<div id="loading-spinner">
+			<div class="lds-spinner"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+		</div>
 
-		<span id="error-container" class="hidden">There was an error performing this operation: <span id="error-message"></span></span>
+		<div id="template-target"></div>
 
+		<!-- Templates are here to be used in JavaScript. Must have single root node inside. -->
+		<template id="no-videos-found">
+			<div>
+				<div class="center">
+					<img src="/images/VideoMirror48.png" alt="VideoMirror Logo">
+				</div>
+
+				<div class="message">
+					<strong>No videos were found on the page.</strong><br>
+					VideoMirror will continue scanning and flip any that appear.
+				</div>
+
+				<div class="action">
+					<button type="button" data-close>DISMISS</button>
+				</div>
+			</div>
+		</template>
+
+		<template id="error">
+            <div>
+				<div class="center" style="font-size: 3rem;">
+					⚠️
+				</div>
+				<div class="message">
+					{{error}}
+				</div>
+			</div>
+		</template>
 
         <script src="popup.js"></script>
     </body>

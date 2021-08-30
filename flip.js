@@ -20,8 +20,8 @@
         '.meeting-app .active-video-container__canvas', // Zoom: The other main camera
         '.meeting-app .self-video-container__canvas',   // Zoom: Your own camera
         '.meeting-app .gallery-video-container__canvas',// Zoom: Gallery view
-        'iframe[src^="https://player.vimeo.com"]',       // Embedded vimeo
-    ].join(', ');  // (note: this must also be changed in background.js)
+        'iframe[src^="https://player.vimeo.com"]',      // Embedded vimeo
+    ].join(', ');
 
     let watchList = new Map();
 
@@ -158,6 +158,11 @@
         document.querySelectorAll(flipQuery).forEach(video => flipVideo(video, true, flipped));
     }
 
+    function videoMirrorGetVideoCount() {
+        return document.querySelectorAll(flipQuery).length;
+    }
+
     window.videoMirrorSetFlip = videoMirrorSetFlip;
+    window.videoMirrorGetVideoCount = videoMirrorGetVideoCount;
 })();
 

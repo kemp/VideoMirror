@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>VideoMirror Options</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        :root {
+            --brand-color: #AC0609;
+        }
+
+        .options-container {
+            width: 100%;
+            min-height: 12rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            justify-content: center;
+            padding: 4rem;
+        }
+
+        button {
+            background: white;
+            padding: 0.4rem 1rem;
+            border-radius: 4px;
+            border: 1px solid var(--brand-color);
+            color: var(--brand-color);
+            cursor: pointer;
+            width: 100%;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="options-container">
+        <div class="options-message">
+            If you would like to support my work in maintaining VideoMirror, consider making a donation:
+        </div>
+        <button id="donate-button">DONATE</button>
+    </div>
+
+    <script src="options.js"></script>
+</body>
+</html>

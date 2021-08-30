@@ -1,27 +1,27 @@
 {
-  "name": "VideoMirror",
-  "version": "2.2.0",
-  "description": "Video mirror (left-to-right) on any page (including Zoom, YouTube, Vimeo, Twitch, Google Meet, etc.)",
-  "permissions": ["declarativeContent", "activeTab"],
-  "background": {
-    "scripts": ["background.js"],
-    "persistent": false
-  },
-  "page_action": {
-    "default_popup": "popup.html",
-    "default_title": "VideoMirror Usage: on a page with a video, click the VideoMirror icon. All videos on the page should mirror. Click again to undo.",
-    "default_icon": {
-      "16": "images/VideoMirror16.png",
-      "32": "images/VideoMirror32.png",
-      "48": "images/VideoMirror48.png",
-      "128": "images/VideoMirror128.png"
-    }
-  },
-  "icons": {
-    "16": "images/VideoMirror16.png",
-    "32": "images/VideoMirror32.png",
-    "48": "images/VideoMirror48.png",
-    "128": "images/VideoMirror128.png"
-  },
-  "manifest_version": 2
+    "name": "VideoMirror",
+    "version": "3.0.0",
+    "description": "Video mirror (left-to-right) on any page (including Zoom, YouTube, Vimeo, Twitch, Google Meet, etc.)",
+    "permissions": ["scripting", "activeTab"],
+    "action": {
+        "default_popup": "popup.html",
+        "default_title": "VideoMirror Usage: on a page with a video, click the VideoMirror icon. All videos on the page should mirror. Click again to undo.",
+        "default_icon": {
+            "16": "images/VideoMirror16.png",
+            "32": "images/VideoMirror32.png",
+            "48": "images/VideoMirror48.png",
+            "128": "images/VideoMirror128.png"
+        }
+    },
+    "options_ui": {
+        "page": "options.html",
+        "open_in_tab": false
+    },
+    "icons": {
+        "16": "images/VideoMirror16.png",
+        "32": "images/VideoMirror32.png",
+        "48": "images/VideoMirror48.png",
+        "128": "images/VideoMirror128.png"
+    },
+    "manifest_version": 3
 }
