@@ -26,3 +26,7 @@ Recent updates:
 - v1.2.1: Remove uninstallation survey
 - v1.2.0: Flipping is more consistent during page changes (e.g. when entering/exiting full screen)
 - v1.1.0: Animation appears when mirroring videos
+
+## Sponsors
+
+- This project is tested with [BrowserStack](https://www.browserstack.com/).
