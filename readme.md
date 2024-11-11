@@ -12,7 +12,7 @@
 
 Usage: on a page with video, click the VideoMirror icon. All videos on the page should mirror. Click again to undo.
 
-If you would like to support my work in maintaining VideoMirror and keeping it ad-free, donations are accepted at https://ko-fi.com/skemp.
+If you would like to support my work in maintaining VideoMirror and keeping it ad-free, donations are accepted at https://videomirror.app/donate.
 Thank you so much for helping out!
 
 Recent updates:
