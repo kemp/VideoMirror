@@ -1,6 +1,6 @@
 # VideoMirror
 
-![VideoMirror icon](images/VideoMirror128.png)
+![VideoMirror icon](src/images/VideoMirror128.png)
 
 > Video mirror (left-to-right) on any page (including Zoom, YouTube, Vimeo, Twitch, Google Meet, etc.)!
 
@@ -16,7 +16,8 @@ If you would like to support my work in maintaining VideoMirror and keeping it a
 Thank you so much for helping out!
 
 Recent updates:
-- v3.0.0 (latest): Upgrade to Manifest v3, make flipping more consistent and clearer
+- v3.0.1 (latest): Updates to analytics
+- v3.0.0: Upgrade to Manifest v3, make flipping more consistent and clearer
 - v2.2.0: Fix fullscreen issues
 - v2.1.0: Actually fixed Google Meet issue
 - v2.0.1: Fixed Google Meet issue

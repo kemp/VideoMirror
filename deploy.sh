@@ -1,5 +1,12 @@
 #!/bin/bash
 
-DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+set -e
 
-zip -r ~/Desktop/VideoMirror "$DIR"
+docker build \
+  -t "videomirror-builder:latest" \
+  .
+
+docker run --rm \
+  "videomirror-builder:latest" > "VideoMirror.zip"
+
+echo "Deployed"
