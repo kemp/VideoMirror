@@ -65,13 +65,23 @@
         // Close the pop-up window with the loading spinner
         if (count === 0 && !isFlipped) {
             showTemplate('no-videos-found');
+
+            await triggerStat('flip_no_videos')
         } else {
-            window.close();
+            const totalFlipCount = await registerFlipCount(!isFlipped)
+            if (!isFlipped && (totalFlipCount === 10 || (totalFlipCount > 0 && totalFlipCount % 10 === 0))) {
+                await triggerStat('donate_shown');
+
+                showTemplate('flip_fan', { count: totalFlipCount })
+            } else {
+                window.close();
+            }
         }
     } catch (error) {
-            console.error(error);
+        console.error(error);
 
-            showTemplate('error', { error })
+        showTemplate('error', { error })
+        await triggerStat('error')
     }
 
     function setFlip(isFlipped) {
@@ -132,5 +142,33 @@
         });
     }
 
+    function initDonateButtons() {
+        document.querySelectorAll('button[data-donate]').forEach((button) => {
+            button.addEventListener('click', () => {
+                triggerStat('donate_click')
+                  .then(() => {
+                      window.open('https://videomirror.app/donate', '_blank');
+                  });
+            });
+        });
+    }
+
+    async function registerFlipCount(isFlipped) {
+        return await triggerStat(isFlipped ? 'flip_on' : 'flip_off')
+    }
+
+    async function triggerStat(stat) {
+        const statCountName = `${stat}_count`
+
+        const currentCount = (await chrome.storage.local.get([statCountName]))[statCountName] || 0
+
+        await chrome.storage.local.set({ [statCountName]: currentCount + 1 });
+
+        await chrome.runtime.sendMessage({ stat: stat, });
+
+        return currentCount + 1;
+    }
+
     initCloseButtons();
+    initDonateButtons();
 })(chrome);

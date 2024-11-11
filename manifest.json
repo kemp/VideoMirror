@@ -1,8 +1,8 @@
 {
     "name": "VideoMirror",
-    "version": "3.0.0",
+    "version": "3.0.1",
     "description": "Video mirror (left-to-right) on any page (including Zoom, YouTube, Vimeo, Twitch, Google Meet, etc.)",
-    "permissions": ["scripting", "activeTab"],
+    "permissions": ["scripting", "activeTab", "storage"],
     "action": {
         "default_popup": "popup.html",
         "default_title": "VideoMirror Usage: on a page with a video, click the VideoMirror icon. All videos on the page should mirror. Click again to undo.",
@@ -22,6 +22,10 @@
         "32": "images/VideoMirror32.png",
         "48": "images/VideoMirror48.png",
         "128": "images/VideoMirror128.png"
+    },
+    "background": {
+        "service_worker": "service_worker.js",
+        "type": "module"
     },
     "manifest_version": 3
 }

@@ -115,7 +115,10 @@
 				beckground: #fefefe;
 			}
 
-			button {
+			button, .btn {
+				display: block;
+				text-align: center;
+				text-decoration: none;
 				background: white;
 				padding: 0.4rem 1rem;
 				border-radius: 4px;
@@ -164,6 +167,24 @@
 			</div>
 		</template>
 
-        <script src="popup.js"></script>
+		<template id="flip_fan">
+			<div>
+				<div class="center">
+					<img src="/images/VideoMirror48.png" alt="VideoMirror Logo">
+				</div>
+
+				<div class="message">
+					<strong>Thank you for using VideoMirror</strong><br>
+					Thank you for using VideoMirror {{count}} times.
+					Consider making a donation to support my work.
+				</div>
+
+				<div class="action">
+					<button type="button" data-donate>DONATE</button>
+				</div>
+			</div>
+		</template>
+
+		<script src="popup.js"></script>
     </body>
 </html>
