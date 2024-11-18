@@ -4,7 +4,20 @@ chrome.runtime.onInstalled.addListener(async ({ reason }) => {
   if (reason === 'install' || reason === 'upgrade') {
     await triggerStat(reason)
   }
+
+  if (reason === 'install') {
+    await chrome.alarms.create('videomirror-analytics-alarm', {
+      delayInMinutes: 1,
+      periodInMinutes: 60,
+    });
+  }
 })
+
+chrome.alarms.onAlarm.addListener((alarm) => {
+  if (alarm.name === 'videomirror-analytics-alarm') {
+    triggerStat('ping')
+  }
+});
 
 chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
     if (request.stat) {
@@ -69,7 +82,7 @@ async function triggerStat(eventName) {
 
   await saveQueue(eventQueue)
 
-  if ((eventQueue.length > 50 && Math.random() < 0.8) || (Math.random() < 0.25)) {
+  if (eventName === 'ping' || (eventQueue.length > 50 && Math.random() < 0.8) || (Math.random() < 0.25)) {
     try {
       await sendEventQueue(eventQueue)
 
